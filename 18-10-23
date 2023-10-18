@@ -1,0 +1,17 @@
+LC prb 7: 
+class Solution {
+    public int reverse(int n) {
+        int rev=0;
+        while(n!=0){ //loop continues until n becomes 0
+            int m=n%10; //for getting m i.e last digit of m
+            n=n/10; //n: Update n to remove the last digit by integer division by 10
+            if(rev>Integer.MAX_VALUE/10|| rev<Integer.MIN_VALUE/10) //Check for integer overflow by comparing rev with Integer.MAX_VALUE/10 and Integer.MIN_VALUE/10.
+            {
+
+            return 0;
+            }
+            rev=(rev*10)+m; // get actualreversed no.
+        }
+        return rev;
+    }
+}
