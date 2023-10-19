@@ -15,3 +15,104 @@ class Solution {
         return rev;
     }
 }
+
+.......................................................................................................................................................
+LC 9: check if palindrome 
+public class Solution {
+    public boolean isPalindrome(int n) {
+        if (n < 0) {
+            return false; // Negative numbers are not palindromes
+        }
+        int rev = 0;
+        int originalN = n; // Store the original value of n
+        while (n != 0) {
+            int m = n % 10; // Get the last digit of n
+            n = n / 10; // Update n to remove the last digit
+            if (rev > Integer.MAX_VALUE / 10 || (rev == Integer.MAX_VALUE / 10 && m > 7)) {
+                return false; // Check for integer overflow
+            }
+            rev = rev * 10 + m; // Reverse the number }
+        return originalN == rev; // Check for palindrome
+    }}
+............................................................................................................................
+checkif amstrong
+package practice_gfg;
+
+public class Armstrong {
+    static boolean isArmstrongNumber(int n) {
+        int count = 0;  // Initialize a variable to count the number of digits
+        int originalNo = n;  // Store the original number
+        int temp = n;  // Assign the original number to temp
+
+        // Count the number of digits in the original number
+        while (temp != 0) {
+            count++;
+            temp = temp / 10;
+        }
+
+        int sumOfPowers = 0;  // Initialize a variable to store the sum of powers of digits
+
+        // Calculate the sum of powers of digits
+        while (n != 0) {
+            int digit = n % 10;  // Extract the last digit of the number
+            sumOfPowers += Math.pow(digit, count);  // Add the digit raised to the power of the count
+            n /= 10;  // Move to the next digit
+        }
+
+        // Check if the sum of powers is equal to the original number
+        return (sumOfPowers == originalNo);
+    }
+
+    public static void main(String[] args) {
+        int number = 153;  // Define the number to be checked
+
+        // Check if the number is an Armstrong number and print the result
+        if (isArmstrongNumber(number)) {
+            System.out.println(number + " is an Armstrong Number");
+        } else {
+            System.out.println(number + " is not an Armstrong Number");
+        }
+    }
+}
+................................................................................................................
+check if prime no
+public class Solution {
+    public static boolean isPrime(int n) {
+        if (n < 2) {
+            return false; // Numbers less than 2 are not prime
+        }
+
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                return false; // If n is divisible by i, it's not a prime number
+            }
+        }
+
+        return true; // n is a prime number
+    }
+..................................................................................................................
+print 1 to n without loop using recursion
+
+public class Solution {
+    public static int[] printNos(int x) {
+      
+        int []ans = new int[x];
+        // Calling recursive function
+        recursiveFunction(x, ans);
+        return ans;
+    }
+
+    public static void recursiveFunction(int x, int []ans) {
+        if(x == 0) { //base case always
+            return;
+        }
+
+        // Call recursive function
+        recursiveFunction(x - 1, ans);//If x is not 0, it calls itself with x - 1 and the same ans array.
+
+        // Insert element in the array
+        ans[x - 1] =x;
+    }
+
+}
+................................................................................................................
