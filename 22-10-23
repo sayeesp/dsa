@@ -1,0 +1,239 @@
+1.selection sort
+first, we will select the range of the unsorted array using a loop (say i) that indicates the starting index of the range.
+The loop will run forward from 0 to n-1. The value i = 0 means the range is from 0 to n-1, and similarly, i = 1 means the range is from 1 to n-1, and so on.
+(Initially, the range will be the whole array starting from the first index.)
+Now, in each iteration, we will select the minimum element from the range of the unsorted array using an inner loop.
+After that, we will swap the minimum element with the first element of the selected range(in step 1). 
+Finally, after each iteration, we will find that the array is sorted up to the first index of the range. 
+public class Solution {
+    public static void selectionSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            int minIndex = i;
+
+            // Find the index of the minimum element in the remaining unsorted part of the array
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+
+            // Swap the found minimum element with the element at index i
+            int temp = arr[minIndex];
+            arr[minIndex] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {64, 34, 25, 12, 22, 11, 90};
+        selectionSort(arr);
+
+        System.out.println("Sorted array:");
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+    }
+}
+..............................................................
+2.bubble sort
+First, we will select the range of the unsorted array. For that, we will run a loop(say i) that will signify the last index of the selected range. The loop will run backward from index n-1 to 0(where n = size of the array). The value i = n-1 means the range is from 0 to n-1, and similarly, i = n-2 means the range is from 0 to n-2, and so on.
+Within the loop, we will run another loop(say j, runs from 0 to i-1 though the range is from 0 to i) to push the maximum element to the last index of the selected range, by repeatedly swapping adjacent elements.
+Basically, we will swap adjacent elements(if arr[j] > arr[j+1]) until the maximum element of the range reaches the end.
+Thus, after each iteration, the last part of the array will become sorted. Like: after the first iteration, the array up to the last index will be sorted, and after the second iteration, the array up to the second last index will be sorted, and so on.
+After (n-1) iteration, the whole array will be sorted.
+package dsa;
+
+public class BubbleSort {
+    public void bubbleSort(int[] arr, int n) {
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = 0; j <= i - 1; j++) {
+                if (arr[j + 1] < arr[j]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+
+        System.out.print("After Bubble Sort: ");
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {13, 46, 24, 52, 20, 9};
+        int n = arr.length;
+
+        System.out.print("Before Bubble Sort: ");
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+
+        BubbleSort bubbleSort = new BubbleSort();
+        bubbleSort.bubbleSort(arr, n);
+    }
+}
+.................................................................................................
+2.Insertion sort
+Select an element in each iteration from the unsorted array(using a loop).
+Place it in its corresponding position in the sorted part and shift the remaining elements accordingly (using an inner loop and swapping).
+The “inner while loop” basically shifts the elements using swapping.
+package dsa;
+
+public class InsertionSort {
+    static void insertion_sort(int[] arr, int n) {
+        for (int i = 0; i <= n - 1; i++) {
+            int j = i;
+            while (j > 0 && arr[j - 1] > arr[j]) {
+                int temp = arr[j - 1];
+                arr[j - 1] = arr[j];
+                arr[j] = temp;
+                j--;
+            }
+        }
+
+        System.out.println("After insertion sort: ");
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+    public static void main(String args[]) {
+        int arr[] = {13, 46, 24, 52, 20, 9};
+        int n = arr.length;
+        System.out.println("Before Using insertion Sort: ");
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+        insertion_sort(arr, n);
+    }
+
+}  
+......................................................................................................
+3.Merge sort
+We will be creating 2 functions mergeSort() and merge().
+mergeSort(arr[], low, high):
+In order to implement merge sort we need to first divide the given array into two halves. Now, if we carefully observe, we need not divide the array and create a separate array, but we will divide the array’s range into halves every time. For example, the given range of the array is 0 to 4(0-based indexing). Now on the first go, we will divide the range into half like (0+4)/2 = 2. So, the range of the left half will be 0 to 2 and for the right half, the range will be 3 to 4. Similarly, if the given range is low to high, the range for the two halves will be low to mid and mid+1 to high, where mid = (low+high)/2. This process will continue until the range size becomes.
+So, in mergeSort(), we will divide the array around the middle index(rather than creating a separate array) by making the recursive call :
+1. mergeSort(arr,low,mid)   [Left half of the array]
+2. mergeSort(arr,mid+1,high)  [Right half of the array]
+where low = leftmost index of the array, high = rightmost index of the array, and mid = middle index of the array.
+Now, in order to complete the recursive function, we need to write the base case as well. We know from step 2.1, that our recursion ends when the array has only 1 element left. So, the leftmost index, low, and the rightmost index high become the same as they are pointing to a single element.
+Base Case: if(low >= high) return;
+2.In the merge function, we will use a temp array to store the elements of the two sorted arrays after merging. Here, the range of the left array is low to mid and the range for the right half is mid+1 to high.
+Now we will take two pointers left and right, where left starts from low and right starts from mid+1.
+Using a while loop( while(left <= mid && right <= high)), we will select two elements, one from each half, and will consider the smallest one among the two. Then, we will insert the smallest element in the temp array.
+After that, the left-out elements in both halves will be copied as it is into the temp array.
+Now, we will just transfer the elements of the temp array to the range low to high in the original array. The pseudo code will look like the following:
+package dsa;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class MergeSort {
+
+    private static void merge(int[] arr, int low, int mid, int high) {
+        ArrayList<Integer> temp = new ArrayList<>();
+        int left = low;
+        int right = mid + 1;
+
+        while (left <= mid && right <= high) {
+            if (arr[left] < arr[right]) {
+                temp.add(arr[left]);
+                left++;
+            } else {
+                temp.add(arr[right]);
+                right++;
+            }
+        }
+
+        while (left <= mid) {
+            temp.add(arr[left]);
+            left++;
+        }
+
+        while (right <= high) {
+            temp.add(arr[right]);
+            right++;
+        }
+
+        for (int i = low; i <= high; i++) {
+            arr[i] = temp.get(i - low);
+        }
+    }
+
+    public static void mergeSort(int[] arr, int low, int high) {
+        if (low < high) {
+            int mid = (low + high) / 2;
+            mergeSort(arr, low, mid); // left half
+            mergeSort(arr, mid + 1, high); // right half
+            merge(arr, low, mid, high); // merging sorted halves
+        }
+    }
+
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        int n = 7;
+        int arr[] = {9, 4, 7, 6, 3, 1, 5};
+
+        System.out.println("Before sorting array: ");
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+
+        mergeSort(arr, 0, n - 1);
+
+        System.out.println("After sorting array: ");
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+}
+..............................................................................................
+LC 1752 if array rotated
+public boolean check(int[]nums){
+int n=nums.length;
+boolean rotated=false;//sets initial value of rotated variable as false
+for(i=0;i<n;i++){
+if(nums[i]>nums[(i+1)%n]{// % is used to wrap around to the beginning of the array if needed.
+if(rotated)//If nums[i] is greater than the next element, it means a rotation has been detected. If rotated is already true, it means another rotation point was encountered, so it returns false.
+return false;}
+rotated=true;
+} else if(nums[i]==nums[(i+1)%n]{
+continue;}
+}
+return true;
+}}
+}
+...............................................................................................
+LC 26 remove duplicate from sorted array
+package lc;//using two pointer algorithm take two i and jth elements starting from 0th and i+1 index  
+
+public class twentysix {
+	public static void main(String[]args) {
+		int arr[]= {3,3,4,4,6,6,6,7,7};
+		int k=removeduplicate(arr);
+		System.out.println("The array after removing duplication :");
+		for(int i=0;i<k;i++) {
+			System.out.println(arr[i]+" ");
+		}
+	}
+  static int removeduplicate(int[]arr) {
+	  int i=0;
+	  for(int j=i+1;j<arr.length;j++) {
+		  if(arr[i]!=arr[j]) {
+			  i++;
+			  arr[i]=arr[j];//as i=j ith pointer will shift at jth index so i=j
+		  } 
+	  }
+	  return i+1;
+  }
+}
+
