@@ -1,0 +1,19 @@
+1. lower bound
+public class Solution {
+    public static int lowerBound(int []arr, int n, int x) { //x is xth index to find lowerbound
+        for(int i=0;i<n;i++){
+            if(arr[i]>=x){
+                return i;
+            }
+        }
+        return n; //if x is not greater than i return n
+    }
+    public static void main(String[] args){
+        int[] arr={1,2,2,3,3,5};
+        int n=6; int x=0;
+      int ind=lowerBound(arr,n,x);
+      System.out.print("The lower bound index is:"+ind);
+    }
+}
+......................................................................................
+2.
