@@ -16,4 +16,100 @@ public class Solution {
     }
 }
 ......................................................................................
-2.
+2.upper bound
+
+import java.util.*;
+
+public class tUf {
+
+    public static int upperBound(int[] arr, int x, int n) {
+        int low = 0, high = n - 1;
+        int ans = n;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            // maybe an answer
+            if (arr[mid] > x) {
+                ans = mid;
+                //look for smaller index on the left
+                high = mid - 1;
+            } else {
+                low = mid + 1; // look on the right
+            }
+        }
+        return ans;
+    }
+    public static void main(String[] args) {
+        int[] arr = {3, 5, 8, 9, 15, 19};
+        int n = 6, x = 9;
+        int ind = upperBound(arr, x, n);
+        System.out.println("The upper bound is the index: " + ind);
+    }
+}
+....................................................................
+1021 LC remove parenthesis
+Initialize the bracket stack and the sb StringBuilder object.
+Iterate over the characters of the input string s.
+If the current character is an open parenthesis, then:
+If the bracket stack is not empty, then append the current character to the sb object.
+Push the current character onto the bracket stack.
+Else, if the current character is a closing parenthesis, then:
+Pop the top element from the bracket stack.
+If the bracket stack is not empty, then append the current character to the sb object.
+Return the contents of the sb object as a string.
+class Solution {
+    public String removeOuterParentheses(String s) {
+        Stack<Character> bracket = new Stack<>();
+        StringBuilder sb = new StringBuilder("");
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='('){
+                if(bracket.size()>0){
+                    sb.append(s.charAt(i));
+                }
+                bracket.push(s.charAt(i));
+            }else{
+                bracket.pop();
+                if(bracket.size()>0){
+                    sb.append(s.charAt(i));
+                }
+            }
+        }
+        return sb.toString();
+    }
+}
+........................................................................................................
+reverse words in string
+import java.util.*;
+class Test
+{
+public static void main(String[] args)
+{
+	String s = "TUF is great for interview preparation";
+	System.out.println("After reversing words: ");
+	System.out.println(s);
+	s += " ";
+	Stack<String> st = new Stack<String>();
+	int i;
+	String str = "";
+	for (i = 0;i < s.length();i++)
+	{
+		if (s.charAt(i) == ' ')
+		{
+			st.push(str);
+			str = "";
+		}
+		else
+		{
+			str += s.charAt(i);
+		}
+	}
+	String ans = "";
+	while (st.size() != 1)
+	{
+		ans += st.peek() + " ";
+		st.pop();
+	}
+	ans += st.peek(); // The last word should'nt have a space after it
+	System.out.println("After reversing words: ");
+	System.out.print(ans);
+}
+}
