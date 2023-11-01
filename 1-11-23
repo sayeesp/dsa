@@ -125,3 +125,127 @@ class Solution {
   }
 }
 .................................................................................
+LC 796 Rotate string
+1.create stringbuilder to create substring to store (string builder are mutable i.e we can modify stringbuilder but not string)
+2.get first character of sb and store in char ch
+3.delete first character of sb
+4.Append the character ch to the end of sb.
+5.if sb==goal return true and increament
+class Solution {
+    public boolean rotateString(String s, String goal) {
+        StringBuilder sb=new StringBuilder(s);
+        int i=0;
+       while(i<s.length()) 
+       {
+           char ch=sb.charAt(0);
+           sb.deleteCharAt(0);
+           sb.append(ch);
+           if(sb.toString().equals(goal))
+           return true;
+           i++;
+       }
+       return false;
+    }
+}
+...............................................................................................
+LC 151 Reverse words in string
+class Solution {
+    public String reverseWords(String s) {
+        // Trim the input string to remove leading and trailing spaces
+        String[] str = s.trim().split("\\s+");
+
+        // Initialize the output string
+        String out = "";
+
+        // Iterate through the words in reverse order
+        for (int i = str.length - 1; i > 0; i--) {
+            // Append the current word and a space to the output
+            out += str[i] + " ";
+        }
+
+        // Append the first word to the output (without trailing space)
+        return out + str[0];
+    }
+}
+......................................................................
+13.LC ROMAN INTEGERS
+
+
+public class Solution {
+    public int romanToInt(String s) {
+        // Map to store roman numerals
+        Map<Character, Integer> romanMap = new HashMap<>();
+        // Fill the map
+        romanMap.put('I', 1);
+        romanMap.put('V', 5);
+        romanMap.put('X', 10);
+        romanMap.put('L', 50);
+        romanMap.put('C', 100);
+        romanMap.put('D', 500);
+        romanMap.put('M', 1000);
+        // Length of the given string
+        int n = s.length();
+        // Variable to store result
+        int num = romanMap.get(s.charAt(n - 1));
+        // Loop for each character from right to left
+        for (int i = n - 2; i >= 0; i--) {
+            // Check if the character at right of current character is
+            // bigger or smaller
+            if (romanMap.get(s.charAt(i)) >= romanMap.get(s.charAt(i + 1))) {
+                num += romanMap.get(s.charAt(i));
+            } else {
+                num -= romanMap.get(s.charAt(i));
+            }
+        }
+        return num;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        String romanNumeral = "MCMXCIV";
+        int result = solution.romanToInt(romanNumeral);
+        System.out.println("Roman numeral " + romanNumeral + " is equivalent to " + result);
+    }
+}
+.....................................................................
+LC 451 SORT ARRAYS BY FREQUENCY
+It initializes an array arr of size 256 to store the frequency of each character. This array is used to count the frequency of each character in the input string.
+
+It iterates through the input string and increments the corresponding index in the arr array for each character's ASCII value.
+
+It initializes a StringBuilder named sb to build the sorted string efficiently.
+
+It uses a while loop to sort the characters based on their frequency. The loop continues until the max frequency becomes 0 (indicating all characters have been processed).
+
+Inside the loop, it finds the character with the maximum frequency and appends that character to the sb StringBuilder 'max' times (equal to its frequency).
+
+It sets the frequency of the processed character to 0 in the arr array to mark it as processed.
+
+Finally, it returns the sorted string by calling sb.toString().
+class Solution {
+    public String frequencySort(String s) {
+        char[] arr = new char[256];
+    for(int i=0; i<s.length(); i++){
+        arr[s.charAt(i)]++;    
+    }
+    
+    StringBuilder sb = new StringBuilder();
+    int max = -1;
+    while(max != 0){
+        max = -1;
+        char maxi = 0;
+        for(char i=0; i<arr.length; i++){
+            if(arr[i] > max){
+                max = arr[i];
+                maxi = i;
+            }
+        }
+        for(int i=0; i<max; i++){
+            sb.append(maxi);   
+        }
+        arr[maxi] = 0;
+    }
+    return sb.toString();
+        
+    }
+}
