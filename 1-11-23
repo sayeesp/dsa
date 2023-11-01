@@ -1,0 +1,127 @@
+LC 205 Isomorphic strings
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+
+        int map1[]=new int[200];//map1 and map2 are two hash tables that will be used to keep track of the mappings between the characters of the two strings
+        int map2[]=new int[200];
+
+        if(s.length()!=t.length())
+        return false;
+        for(int i=0;i<s.length();i++){
+            if(map1[s.charAt(i)]!=map2[t.charAt(i)])
+            return false;////For each character, check if corresponding mappings in hash tables are the same. If they are not the same, then the method returns false
+            map1[s.charAt(i)]=i+1;//Update the map1 and map2 hash tables with the current character and its index.
+            map2[t.charAt(i)]=i+1;
+        }
+        return true;
+    }
+}
+...............................................................
+LC 14 longest common prefix
+Arrays.sort(strs) sorts the input strings in ascending order.
+String s1=strs[0] and String s2=strs[strs.length-1] get the first and last strings in the sorted array.
+int idx=0 initializes the index variable.
+while(idx<s1.length()&& idx<s2.length()) iterates over the two strings, comparing each character.
+if(s1.charAt(idx)==s2.charAt(idx)) checks if the characters at the current index are the same.
+If they are the same, then the index is incremented.
+else breaks the loop.
+return s1.substring(0,idx) returns the substring of the first string up to the index where the two strings differ.
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        Arrays.sort(strs);
+        String s1=strs[0];
+        String s2=strs[strs.length-1];
+        int idx=0;
+        while(idx<s1.length()&& idx<s2.length()){
+            if(s1.charAt(idx)==s2.charAt(idx)){
+                idx++;
+            }else{
+                break;
+            }
+        }
+    return s1.substring(0,idx);
+    }
+}
+String[] strs = {"flower", "flow", "flight"};
+String longestCommonPrefix = new Solution().longestCommonPrefix(strs);
+
+System.out.println(longestCommonPrefix);
+..............................................................................
+// Character array example
+char[] chars = {'H', 'e', 'l', 'l', 'o', '!'};
+System.out.println(chars); // Prints "Hello!"
+
+// String example
+String str = "Hello!";
+System.out.println(str); // Prints "Hello!"
+LC 1903 largest odd number in string
+The if() statement at the beginning of the method checks if the input string is empty. If it is, the method returns the empty string immediately.
+The int n = num.length(); and char[] nums = num.toCharArray(); statements get the length of the input string and convert it to a character array, respectively.
+The for() loop iterates over the character array in reverse order.
+The if (nums[i] % 2 != 0) statement checks if the current character is odd. If it is, the method returns a substring of the character array from the beginning to the current index.
+The return ""; statement at the end of the method is returned if the input string is empty or contains no odd digits.
+class Solution {
+    public String largestOddNumber(String num) {
+        if (num.isEmpty()) {
+            return "";
+        }
+
+        int n = num.length();
+        char[] nums = num.toCharArray();
+
+        for (int i = n - 1; i >= 0; i--) {
+            if (nums[i] % 2 != 0) {
+                return new String(nums, 0, i + 1);
+            }
+        }
+
+        return "";
+    }
+}
+......................................................................................
+LC 242 VALID ANAGRAM
+// class Solution {
+//     public boolean isAnagram(String s, String t) {
+        
+//         char[]ss=s.toCharArray();
+//         char[]ts=t.toCharArray();
+//         if(ss.length!=ts.length){
+//         return false;
+//         }
+//         Arrays.sort(ss);
+//         Arrays.sort(ts);
+//         for(int i=0;i<ss.length;i++){
+             
+//              if(  ss[i]!=ts[i])
+//              return false;
+//         }       
+//         }
+//                return true;
+//     }
+// }
+class Solution {
+  public boolean isAnagram(String s, String t) {
+    char[] ss = s.toCharArray();
+    char[] ts = t.toCharArray();
+
+    // Check if the two strings have the same length.
+    if (ss.length != ts.length) {
+      return false;
+    }
+
+    // Sort the two strings.
+    Arrays.sort(ss);
+    Arrays.sort(ts);
+
+    // Iterate over the sorted strings and compare the characters.
+    for (int i = 0; i < ss.length; i++) {
+      if (ss[i] != ts[i]) {
+        return false;
+      }
+    }
+
+    // If we reach this point, then the two strings are anagrams.
+    return true;
+  }
+}
+.................................................................................
