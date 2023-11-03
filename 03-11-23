@@ -1,0 +1,133 @@
+1.LC 237 delete node 
+class Solution {
+    public void deleteNode(ListNode node) {
+     node.val=node.next.val;//copy the value of the next node into the current node
+     node.next=node.next.next;//node.next = node.next.next; is used to update the next reference of the predecessor node to point directly to the node after the one you want to delete
+}}
+............................................................................................................................................
+2.insert node at beginning
+package dsa;
+class Node {
+    int data;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }}
+public class LinkedList {
+    Node head; // The head of the linked list
+
+    // Insert a node at the beginning
+    public void insertAtBeginning(int data) {
+        Node newNode = new Node(data); // Create a new node with the given data
+        newNode.next = head; // Set the new node's next reference to the current head
+        head = newNode; // Update the head to the new node
+    }
+    // Traverse and print the linked list
+    public void traverse() {
+        Node current = head; // Start at the head of the list
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println(); // Add a new line for readability
+    }
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+
+        // Insert nodes at the beginning
+        list.insertAtBeginning(5);
+        list.insertAtBeginning(3);
+        list.insertAtBeginning(1);
+
+        // Print the linked list
+        System.out.println("Linked List:");
+        list.traverse();
+    }}
+    ................................................................................
+     Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+     }
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+     }
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+     }
+ }
+ ..........................................................
+ 3.length of linked list
+ public class Solution {
+    public static int length(Node head){
+        int count=0;
+        Node current=head;
+        while(current!=null){
+         count++;
+          current = current.next;
+        }
+         return count;
+    }
+}
+............................................................
+4.search int k (given) in linked list 
+public class Solution
+{
+    public static int searchInLinkedList(Node head, int k)
+    {
+        if(head==null){
+            return 0;
+        }
+        if(head.data==k){
+            return 1;
+        }
+        return searchInLinkedList(head.next,k);
+    }}
+    ...................................................................................................
+
+for DLL
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+     public Node prev;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+         this.prev = null;
+     }
+
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+         this.prev = null;
+     }
+
+     Node(int data, Node next, Node prev)
+     {
+         this.data = data;
+         this.next = next;
+         this.prev = prev;
+     }
+ };
+ ****************************************************
+5. Make doubly list of array return head of array
+ 
+ 
