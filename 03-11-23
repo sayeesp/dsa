@@ -6,6 +6,7 @@ class Solution {
 }}
 
 ...................................................................
+
 package linkedList;
 
 class Node{//not public class node 
@@ -65,6 +66,7 @@ public class DeleteNode {//file name DeleteNode main class
 	}
 }
 ...............................................................................
+2.COUNT AND SUM NODES
    public void insert(int data) {
         Node newNode = new Node(data);
         if (head == null) {
