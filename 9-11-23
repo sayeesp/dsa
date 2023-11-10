@@ -1,0 +1,75 @@
+q.50 LC Pov(x,n)
+class Solution {
+    public double solve(double x,long n){// power(x,n)=power(x,n/2)*power(x,n/2) if even and if odd : power(x,n-1)*x 
+        if(n==0){
+            return 1;
+        }
+        double temp=solve(x,n/2);//this is divide and conquer approach
+        temp=temp*temp;
+        if(n%2==0){
+            return temp;
+        } else{
+            return temp*x;
+        }
+    }
+    public double myPow(double x, int n) {
+        long longN=n;//Conversion to Long: The integer n is converted to a long integer longN to handle larger values and negative powers.
+        double ans=solve(x,Math.abs(longN));
+        if(longN<0){//If longN is negative, the reciprocal of the result is returned. This is because raising a number 
+        //to a negative power is equivalent to taking the reciprocal of the number raised to the absolute value of the power.
+            return 1/ans;
+        }
+        return ans;
+    }}
+    .................................................................................................................
+    1922.Q.LC COUNT GOOD NUMBERS//algo in NB 
+    class Solution {
+     int mod=(int)1e9+7;//The choice of 1000000007 is due to the fact that it is a prime number,
+     //and using a prime number as the modulo helps in avoiding certain collisions and provides a good distribution
+     //when dealing with hashing and other operations.
+
+//Additionally, using a large prime modulo like 1000000007 helps prevent integer overflow issues that might occur if you use a smaller modulo.
+// This is especially important when dealing with calculations involving large numbers,
+    public int countGoodNumbers(long n) {
+       
+        long first=(n%2==0?(n/2):(n/2)+1);
+        long second=n/2;
+        long mul1=power(5,first)%mod;
+        long mul2=power(4,second)%mod;
+        long ans=1;
+        ans=(ans*mul1)%mod;
+        ans=(second!=0)?(ans*mul2)%mod:ans;
+        return(int)(ans%mod);
+    }
+   public long power(long x,long y){
+       long temp;
+       if(y==0) return 1;
+       temp=power(x,y/2);
+       if(y%2==0)
+       return (temp*temp)%mod;
+       else return (x*temp*temp)%mod;
+   }
+}
+.................................................................................
+LC 17 Letter Combinations of a Phone number
+class Solution {
+    public List<String> letterCombinations(String digits) {
+      if(digits.isEmpty())
+      return Collections.emptyList();
+      String[] phone_map={"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+      List<String> output=new ArrayList<>();
+      backtrack("",digits,phone_map,output);//The line backtrack("", digits, phone_map, output); is the initial call to the backtrack function, 
+      //starting with an empty initial combination (""), the entire input digits, the phone_map array, and an initially empty output list.
+            return output;
+        }
+        public void backtrack(String combination,String next_digits,String [] phone_map,List<String>output){
+            if(next_digits.isEmpty()){
+                output.add(combination);
+            }else{
+                String letters=phone_map[next_digits.charAt(0)-'2'];
+                for(char letter: letters.toCharArray()){
+                    backtrack(combination+letter,next_digits.substring(1),phone_map,output);
+                }}}}
+...............................................................................................................
+
+
