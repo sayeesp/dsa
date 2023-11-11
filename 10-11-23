@@ -1,0 +1,39 @@
+39.LC COMBINATION SUM
+class Solution {
+    // Function to find all combinations of numbers in the array that sum up to the target
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        // List to store the final output of combinations
+        List<List<Integer>> output = new ArrayList<>();
+        
+        // Sort the candidates array to handle duplicates and optimize the solution
+        Arrays.sort(candidates);
+        
+        // Call the backtrack function to find combinations
+        backtrack(output, new ArrayList<>(), candidates, target, 0);
+        
+        // Return the final list of combinations
+        return output;
+    }
+
+    // Backtracking function to find combinations
+    private void backtrack(List<List<Integer>> output, List<Integer> tempList, int[] candidates, int remain, int start) {
+        // If remaining sum is negative, return as this path is invalid
+        if (remain < 0) {
+            return;
+        }
+        // If remaining sum is zero, a valid combination is found, add it to the output list
+        else if (remain == 0) {
+            output.add(new ArrayList<>(tempList));
+        } else {
+            // Iterate through candidates, starting from the current index
+            for (int i = start; i < candidates.length; i++) {
+                // Add the current candidate to the temporary list
+                tempList.add(candidates[i]);
+                
+                // Recursively call backtrack with the updated remaining sum and index
+                backtrack(output, tempList, candidates, remain - candidates[i], i);
+                
+                // Remove the last element to backtrack and explore other possibilities
+                tempList.remove(tempList.size() - 1);
+            }}}}
+.......................................................................................................
