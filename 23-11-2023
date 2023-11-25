@@ -1,0 +1,57 @@
+496. Next Greater Element I
+ public class Solution{
+        public int[] nextGreaterElement(int [] nums1,int [] nums2){
+            int[] nge=new int [nums2.length];
+            Stack<Integer> st=new Stack();
+            for(int i=nums2.length-1;i>=0;i--){
+               
+                     while (st.size() > 0 && st.peek() < nums2[i]) {
+                st.pop();
+                }
+                if(st.size()>0)
+                nge[i]=(int)st.peek();
+                else
+                nge[i]=-1;
+                st.push(nums2[i]);
+            }
+            HashMap h=new HashMap();
+            for(int i=nums2.length-1;i>=0;i--)
+                h.put(nums2[i],nge[i]);
+                int ans[]=new int[nums1.length];
+                int i=0;//initializes an index variable i to track the position in the ans array.
+                for(int x:nums1){ // Iterates through each element x in the array nums1.
+                  if(h.containsKey(x)){
+                      int temp=(int)h.get(x);//Retrieves the value associated with the key x from the HashMap and stores it in the variable temp.
+                      ans[i]=temp;
+                      i++;
+                  }
+                }
+                return ans;
+            }
+        }          
+
+        //.....................................................
+        q.503 NEXT GREATER ELEMENT
+        class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+      int n=nums.length;
+      int nge[] =new int[n];
+      Stack<Integer> st=new Stack <>();
+      for(int i=2*n-1;i>=0;i--){
+          while(st.isEmpty() && st.peek()<=nums[i%n]){
+              st.pop();
+          }
+          if(i<n){
+              if(!st.isEmpty() )
+               nge[i]=st.peek();
+           }else{
+              nge[i]=-1;
+      }}
+        if (i <2*n - 1) {
+                st.push(nums[i % n]);
+            }
+        }
+          
+          return nge;
+    }}
+        
