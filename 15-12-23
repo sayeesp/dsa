@@ -1,0 +1,38 @@
+1768 Merge strings alternately
+class Solution {
+    public String mergeAlternately(String word1, String word2) {
+        StringBuilder result=new StringBuilder();
+        int i=0;
+        while(i<word1.length()||i<word2.length()){
+        if(i< word1.length()){
+            result.append(word1.charAt(i));
+        }
+        if(i< word2.length()){
+            result.append(word2.charAt(i));
+        }
+        i++;
+
+    }
+          return result.toString();
+}
+}
+......................................................
+1431.greatest kid candies
+class Solution {
+    public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+        List<Boolean> result = new ArrayList<>();
+        
+        int max=candies[0];
+        for(int i=1;i<candies.length;i++){
+              if (candies[i] > max) {
+                max = candies[i];
+            }
+        }
+             for ( int i = 0; i < candies.length; i++) {
+            result.add(candies[i] + extraCandies >= max);
+        }
+
+             return result;
+    }
+}
+...............................................
